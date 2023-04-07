@@ -1,0 +1,41 @@
+// Iterative 
+class GfG {
+    int convertfive(int num) {
+        // Your code here
+        int res=0,p=1,s=0;
+        while(num!=0)
+        {
+            int r=num%10;
+            if(r==0)
+            r=5;
+            res=res+r*p;
+            p=p*10;
+            num=num/10;
+        }
+        return res;
+    }
+}
+
+// Recursive 
+class GfG {
+    int convert0To5Rec(int num) {
+        // Base case for recursion termination
+        if(num == 0){
+            return 0;
+        }
+        
+        // Extract the last digit and change it if needed 
+        int digit = num % 10;
+        if(digit == 0) digit = 5;
+        
+        // convert remainig digits and append the last digit
+        return convert0To5Rec(num / 10) * 10 + digit;
+    }
+    int convertfive(int num) {
+        // Your code here
+        if(num == 0)
+            return 5;
+        else
+            return convert0To5Rec(num);
+    }
+}
