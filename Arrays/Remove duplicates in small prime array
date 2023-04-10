@@ -1,0 +1,108 @@
+{
+        int dp[100] = {0};
+       vector<int> v;
+       for(int i = 0; i<n; i++){
+           if(dp[arr[i]] == 0){
+               dp[arr[i]]=1;
+               v.push_back(arr[i]);
+           }
+       }
+       return v;
+        
+    }
+    
+    /*------------------------------*/
+
+class Solution
+{
+    ArrayList<Integer> removeDuplicate(int arr[], int n)
+    {
+        // code here 
+        ArrayList<Integer> al = new ArrayList<Integer>();
+        LinkedHashSet<Integer> h = new LinkedHashSet<Integer>();
+        for(int i: arr) h.add(i);
+        for(int i:h)al.add(i);
+        return al;
+    }
+}
+
+
+/*------------------------------*/ 
+
+`   ArrayList<Integer> al = new ArrayList<>(); // new list
+        for(int i : arr){
+            if(!al.contains(i)){
+                al.add(i);
+            }
+        }
+        
+        return al;
+        
+        
+/*------------------------------*/       
+        
+static int[] removeDups(int[] vect)
+    {
+        int res_ind = 1;
+
+        // Loop invariant: Elements from vect[0]
+        // to vect[res_ind-1] are unique.
+        for (int i = 1; i < vect.length; i++) {
+            for (int j = 0; j < i; j++)
+                if (vect[i] == vect[j])
+                    break;
+            if (j == i)
+                vect[res_ind++] = vect[i];
+        }
+
+        // Removes elements from vect[res_ind]
+        // to vect[end]
+        int[] new_arr = new int[res_ind];
+        for (int i = 0; i < res_ind; i++)
+            new_arr[i] = vect[i];
+
+        return new_arr;
+    }
+    
+    
+    /*------------------------------*/ 
+    
+    
+    static int[] removeDups(int[] vect)
+    {
+        // sort the array
+        Arrays.sort(vect);
+
+        // pointer
+        int first = 1;
+
+        // remove duplicate elements
+        for (int i = 1; i < vect.length; i++)
+            if (vect[i] != vect[i - 1])
+                vect[first++] = vect[i];
+
+        // mark rest of elements to INT_MAX
+        for (int i = first; i < vect.length; i++)
+            vect[i] = Integer.MAX_VALUE;
+
+        return vect;
+    }
+    
+    
+      
+    /*------------------------------*/   
+    
+     int prod = vect[0];
+        int res_ind = 1;
+        for (int i = 1; i < vect.length; i++) {
+            if (prod % vect[i] != 0) {
+                vect[res_ind++] = vect[i];
+                prod *= vect[i];
+            }
+        }
+        return Arrays.copyOf(vect, res_ind);
+    }
+    
+    
+        
+    /*------------------------------*/ 
