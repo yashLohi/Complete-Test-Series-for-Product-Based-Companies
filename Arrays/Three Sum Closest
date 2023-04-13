@@ -1,0 +1,44 @@
+ static int threeSumClosest(int[] arr, int target)  
+	{ 
+        // code here
+        Arrays.sort(arr);
+        
+        int diff = Integer.MAX_VALUE;
+        int ans = 0;
+        for(int i=0; i<arr.length-2; i++){
+            int first = arr[i];
+            int start = i+1;
+            int end = arr.length -1;
+            while(start<end){
+                if(first+arr[start]+arr[end]==target)return target;
+                else if(Math.abs(first+arr[start]+arr[end]-target)<diff){
+                    diff=Math.abs(first+arr[start]+arr[end]-target);
+                    ans=first+arr[start]+arr[end];
+                }
+                else if(Math.abs(first+arr[start]+arr[end]-target)==diff){
+                    ans=Math.max(ans,first+arr[start]+arr[end]);
+                }
+                if(first+arr[start]+arr[end]>target)end--;
+                 else start++;
+            }
+        }return ans;
+ 
+ ==========================================
+ 
+Arrays.sort(arr);
+        int closest_sum = Integer.MAX_VALUE;
+        for(int i =0; i < arr.length-2; i++){
+            int ptr1 = i+1, ptr2 = arr.length-1;
+            while(ptr1 < ptr2){
+                int sum = arr[i] + arr[ptr2] + arr[ptr2];
+                if(Math.abs(target - sum) < Math.abs(target - closest_sum)){
+                    closest_sum = sum;
+                }
+                if(sum > target){
+                    ptr2--;
+                }else{
+                    ptr1++;
+                }
+            }
+        }
+        return closest_sum;
