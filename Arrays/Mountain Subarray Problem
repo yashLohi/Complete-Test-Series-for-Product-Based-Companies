@@ -1,0 +1,80 @@
+class Solution {
+    public ArrayList<Boolean> processQueries(int[] a, int n, ArrayList<Pair> queries,
+                                      int q) {
+        // code here
+       int[] left = new int[n];
+       int[] right = new int[n];
+       preProcess(a, n, left, right);
+       ArrayList<Boolean> v = new ArrayList<Boolean>();
+       for(int i = 0; i<q; i++){
+           v.add(isSubarrayMountainForm(left, right, queries.get(i).l, queries.get(i).r));
+       }
+       return v;
+       
+    }
+    
+    public void preProcess(int[] arr, int n, int[] left, int[] right){
+        // initialize first left index as that index only
+        left[0] = 0;
+        int lastIncr = 0;
+        
+        for(int i = 1; i<n; i++){
+            // if current value is greater than previous, update last increasing
+            if(arr[i] > arr[i-1]) lastIncr = i;
+            left[i] = lastIncr;
+        }
+        
+        // initialize last right index as that index only 
+        right[n -1] = n-1;
+        int firstDecr = n -1;
+        
+        for(int i = n -2; i>=0; i--){
+            // if current value is greater than previous, update last incresing
+            if(arr[i] > arr[i+1]) firstDecr = i;
+            right[i] = firstDecr;
+        }
+        
+    
+    }
+    
+    // method return true if arr[L..R] is in mountain form
+    
+    boolean isSubarrayMountainForm(int[] left, int[] right, int l, int r){
+        // return true only if right at starting range is greater than at ending range
+        if(right[l] >= left[r]) return true;
+        return false;
+     }
+}
+
+
+================================================
+
+class Solution {
+    public ArrayList<Boolean> processQueries(int[] a, int n, ArrayList<Pair> queries,
+                                      int q) {
+        // code here
+        ArrayList<Boolean> ans = new ArrayList<>();
+        for(int i = 0; i<q; i++){
+            int l = queries.get(i).l;
+            int r = queries.get(i).r;
+            ans.add(solve(a, l, r));
+        }
+        return ans;
+    }
+    
+    public boolean solve(int []arr, int l, int r){
+        boolean inc  = true;
+        for(int i = l+1; i<=r; i++){
+            if(arr[i]>=arr[i-1]){
+                if(!inc){
+                    if(arr[i]!= arr[i-1])
+                    return false;
+                }
+            }
+            else{
+                inc = false;
+            }
+        }
+        return true;
+    }
+}
