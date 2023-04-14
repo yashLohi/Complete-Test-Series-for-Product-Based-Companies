@@ -1,0 +1,35 @@
+public static int equilibriumPoint(long a[], int n) {
+
+        // Your code here
+        long total = 0;
+        long sum = 0;
+        
+        for(int i = 0; i<n; i++) total += a[i];
+        for(int i =0; i<n; i++){
+            long right_sum = total - sum - a[i];
+            if(right_sum == sum) return (i+1);
+            sum += a[i];
+        }
+        
+        return -1;
+        
+    }
+    
+    
+    ==========================================
+    
+    public static int equilibriumPoint(long a[], int n) {
+
+        // Your code here
+        int leftsum=0; int rightsum=0;
+       for(int i=0;i<n;++i){
+           leftsum+=a[i];
+       }
+       for(int i=n-1;i>=0;i--){
+           rightsum +=a[i];
+           if(leftsum==rightsum)
+           return i+1;
+           leftsum-=a[i];
+       }
+       return -1;
+    }
