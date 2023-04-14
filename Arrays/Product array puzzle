@@ -1,0 +1,58 @@
+public static long[] productExceptSelf(int input[], int n) 
+	{ 
+        // code here
+        long[] res = new long[n];
+        for(int i = 0; i<n; i++){
+            res[i] = 1;
+        }
+        
+        if(n <= 1){
+            res[0] = 1;
+            return res;
+        }
+        
+        long left = 1;
+        
+        for(int i = 0; i< n; i++){
+            res[i] = left;
+            left *= input[i];
+        }
+        
+        long right = 1;
+        for(int i = n-1; i>=0; i--){
+            res[i] *= right;
+            right *= input[i];
+        }
+        return res;
+	} 
+  
+  
+  ================================
+  
+  
+  public static long[] productExceptSelf(int nums[], int n) 
+	{ 
+        // code here
+       long ans[] = new long[n];
+	    
+	    // For filling the array
+	    
+        for(int i=0; i<n; i++){
+            
+           long prod = 1;
+           
+           //calculating the product
+           for(int j=0; j<nums.length; j++){
+               
+               if(i != j){
+                   prod = prod*nums[j];
+               }
+               
+           }
+           
+           ans[i] = prod;
+            
+        }
+        
+        return ans;
+	} 
