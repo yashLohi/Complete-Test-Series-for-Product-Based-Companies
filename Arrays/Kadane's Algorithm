@@ -1,0 +1,61 @@
+ long maxSubarraySum(int arr[], int n){
+        
+       int max = arr[0];
+        
+        int msf = 0;
+        
+        for(int i = 0;i<arr.length;i++)
+        {
+            msf += arr[i];
+            if(msf>max)
+            {
+                max = msf;
+            }
+            
+            if(msf < 0)
+            {
+                msf = 0;
+            }
+            
+        }
+        
+        return max;
+        
+    }
+    
+    
+    =======================================
+    
+    long maxSubarraySum(int a[], int n){
+        
+        // Your code here
+         int size = a.length;
+        int max_so_far = Integer.MIN_VALUE, max_ending_here = 0;
+
+        for (int i = 0; i < size; i++)
+        {
+            max_ending_here = max_ending_here + a[i];
+            if (max_so_far < max_ending_here)
+                max_so_far = max_ending_here;
+            if (max_ending_here < 0)
+                max_ending_here = 0;
+        }
+        return max_so_far;
+      
+      
+      =======================================
+      
+      
+      long maxSubarraySum(int arr[], int n){
+        
+        // Your code here
+        
+        int sum = 0;
+        int maxi = arr[0];
+        for(int i =0; i<arr.length; i++){
+            sum += arr[i];
+            if(sum>maxi)maxi = sum;
+            if(sum < 0) sum = 0;
+        }
+        return maxi;
+    }
