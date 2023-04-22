@@ -1,0 +1,75 @@
+static int circularSubarraySum(int a[], int n) {
+        
+        // Your code here
+        int max=a[0]; int min=a[0];
+        int currMax = 0; int currMin=0;
+        int totalSum=0;
+        
+        for(int i=0;i<n;i++){
+            currMax= Math.max(currMax+a[i], a[i]);
+            max = Math.max(currMax, max);
+            currMin = Math.min(currMin+a[i], a[i]);
+            min = Math.min(currMin, min);
+            totalSum+=a[i];
+            
+        }
+        
+    return max>0?Math.max(max, totalSum-min): max;   
+    }
+    
+    
+    ==========================================
+    
+    
+        static int circularSubarraySum(int a[], int n) {
+        
+        // Your code here
+       return Integer.max(kadane(a,n), reverseKadane(a,n));   
+    }
+    
+    public static int kadane(int a[], int n){
+        if(n == 1){
+            return a[0];
+        }
+        
+        int maxSum = a[0];
+        int currSum = maxSum;
+        
+        for(int i =1; i<n; i++){
+            currSum = currSum + a[i];
+            if(currSum < a[i]){
+                currSum = a[i];
+            }
+             if(currSum>maxSum){
+                maxSum=currSum;
+            }
+        }
+        return maxSum;
+    }
+    
+    
+     public static int reverseKadane(int a[], int n){
+        if(n==1){
+            return a[0];
+        }
+        int minSum = a[0];
+        int currSum = minSum;
+        int sum = a[0];
+        for(int i=1;i<n;i++){
+            sum=sum+a[i];
+            currSum = currSum + a[i];
+            if(currSum>a[i]){
+                currSum = a[i];
+            }
+            if(currSum<minSum){
+                minSum=currSum;
+            }
+        }
+        if(sum != minSum){
+          return sum-minSum;
+        }else{
+            return Integer.MIN_VALUE;
+        }
+    }
+
+    
