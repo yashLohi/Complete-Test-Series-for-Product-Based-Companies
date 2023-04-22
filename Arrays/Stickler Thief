@@ -1,0 +1,70 @@
+class Solution
+{
+    //Function to find the maximum money the thief can get.
+    public int FindMaxSum(int arr[], int n)
+    {
+        //storing sum up to current element including and 
+        //excluding it in respective variables.
+        int incl_curr = arr[0];    
+        int excl_curr = 0;  
+        
+        //storing sum up to previous element including and 
+        //excluding it in respective variables.
+        int incl_prev = incl_curr;
+        int excl_prev = excl_curr;
+        
+	    for(int i = 1; i <n; i++)
+	    {
+	        //updating sum up to current element excluding it as maximum
+            //of sum up to previous element excluding and including it.
+	        excl_curr = Math.max(incl_prev, excl_prev);
+	        
+	        //updating sum up to current element including it as sum up to 
+            //previous element excluding it + current element.
+            incl_curr = excl_prev + arr[i];
+            
+            //updating sum up to previous element including and 
+            //excluding it for next iteration.
+            excl_prev = excl_curr;  
+            incl_prev = incl_curr;  
+	    }
+	    //returning the maximum of sum up to current element  
+        //including and excluding it.
+	    return Math.max(excl_curr, incl_curr);
+    }
+}
+
+
+==================================================
+
+ public int FindMaxSum(int arr[], int n)
+    {
+        // Your code here
+         int table[]=new int[n+1];
+        table[0]=0;
+        table[1]=arr[0];
+        for(int i=1;i<n;i++){
+            table[i+1]=Math.max(table[i],table[i-1]+arr[i]);
+        }
+        return table[n];
+    }
+    
+    ===========================================
+    
+    public int FindMaxSum(int arr[], int n)
+    {
+        // Your code here
+        if(n==1)
+        return arr[0];
+        
+        int a = 0;
+        int b = arr[0];
+        
+        for(int i=2;i<=n;i++){
+            int c = Math.max(b,a+arr[i-1]);
+            a = b;
+            b = c;
+        }
+        
+        return b;
+    }
