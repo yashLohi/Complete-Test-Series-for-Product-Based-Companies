@@ -1,0 +1,95 @@
+class Solution {
+    public int findExtra(int a[], int b[], int n) {
+        int index = n-1;  
+      
+        // left and right are end  
+        // points denoting the current range. 
+        int left = 0, right = n - 2; 
+        while (left <= right) 
+        { 
+            int mid = (left+right) / 2; 
+      
+            // If middle element is same  
+            // of both arrays, it means  
+            // that extra element is after  
+            // mid so we update left to mid+1 
+            if (b[mid] == a[mid]) 
+                left = mid + 1; 
+      
+            // If middle element is different 
+            // of the arrays, it means that  
+            // the index we are searching for 
+            // is either mid, or before mid.  
+            // Hence we update right to mid-1. 
+            else
+            { 
+                index = mid; 
+                right = mid - 1; 
+            } 
+        } 
+      
+        // when right is greater than  
+        // left, our search is complete. 
+        return index; 
+    }
+}
+
+
+
+===========================================
+
+
+class Solution {
+    public int findExtra(int a[], int b[], int n) {
+        // add code here.
+         int suma=0;
+        int sumb=0;
+        for(int i=0;i<n;i++){
+            suma+=a[i];
+        }
+        for(int i=0;i<n-1;i++){
+            sumb+=b[i];
+        }
+        int res=(suma-sumb);
+        for(int i=0;i<n;i++){
+            if(res==a[i]){
+                return i;
+                // break;
+            }
+        }
+        return 0;
+      
+    }
+}
+
+=================================================
+
+
+class Solution {
+    public int findExtra(int a[], int b[], int n) {
+         int sum1 = 0, sum2 = 0;
+        for(int i=0; i<a.length; i++) {
+            sum1 += a[i];
+        }
+        for(int i=0; i<b.length; i++) {
+            sum2 += b[i];
+        }
+        int diff = sum1-sum2;
+        return binarySearch(a,diff);
+    }
+    
+    public int binarySearch(int arr[], int key) {
+        int start = 0, end = arr.length-1;
+        while(start <= end) {
+            int mid = start + (end - start) / 2;
+            if(arr[mid] == key) {
+                return mid;
+            } else if(arr[mid] > key) {
+                end = mid-1;
+            } else {
+                start = mid+1;
+            }
+        }
+        return -1;
+    }
+}
