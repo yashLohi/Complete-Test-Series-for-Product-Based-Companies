@@ -1,0 +1,96 @@
+class Solution{
+
+
+	public int peakElement(int[] arr,int n){
+		return peakElementUtil(arr,0,n-1,n);
+	}
+	
+	// recursive binary search to find the peak element
+	public static int peakElementUtil(int[] arr,int low,int high,int n){
+		
+		// calculating mid
+		int mid=(low+high)>>1;
+		
+		// if mid is last or first index with first element
+        // greater than next.
+        // Also, check if mid element is greater than mid - 1 and mid+1
+		if ((mid == 0 || arr[mid-1] <= arr[mid]) &&(mid == n-1 || arr[mid+1] <= arr[mid]))
+			return mid;
+		
+		// If mid is other than 0, then check if mid element is less than prev.
+        // If so, then recurse for lower half
+		else if(mid>0&&arr[mid-1]>arr[mid])
+			return peakElementUtil(arr,low,mid-1,n);
+			
+		// else recurse for the upper half
+		else
+			return peakElementUtil(arr,mid+1,high,n);
+	}
+}
+
+==================================
+
+
+public int peakElement(int[] arr,int n)
+    {
+      int peak = 0;
+
+
+      for(int i=1;i<n;i++){
+           if(arr[peak]<arr[i]){
+               peak = i;
+           }
+       }
+       return peak;
+    }
+    
+================================
+
+public int peakElement(int[] arr,int n)
+    {
+       //add code here.
+       int lo =0, hi = n-1;
+       while(lo <= hi){
+           int mid = (lo + hi)/2;
+           if((mid == 0 || arr[mid] >= arr[mid -1]) && (mid == n-1 || arr[mid] >= arr[mid+1]))
+           return mid;
+           else if(mid > 0 && arr[mid-1] > arr[mid])
+           hi=mid-1;
+           else
+           lo = mid +1;
+       }
+       return -1;
+      
+    }
+=====================================
+
+class Solution
+{
+	// Function to find the peak element
+	// arr[]: input array
+	// n: size of array a[]
+	public int peakElement(int[] arr,int n)
+    {
+        
+         if (n == 1)
+            return 0;
+        if (arr[0] >= arr[1])
+            return 0;
+        if (arr[n - 1] >= arr[n - 2])
+            return n - 1;
+            for (int i = 1; i < n - 1; i++) {
+            
+            if (arr[i] >= arr[i - 1] && arr[i] >= arr[i + 1])
+                return i;
+        }
+        return 0;
+        // int max = 0;
+        // for(int i=0; i<n; i++){
+        //     if(arr[max] < arr[i]){
+        //         max = i;
+        //     }
+        // }
+        // return max;
+    }
+}
+
